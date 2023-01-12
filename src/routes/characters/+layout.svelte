@@ -3,9 +3,7 @@
 	import { writable } from 'svelte/store';
 	import { page } from '$app/stores';
     
-
 	let allCharacters = $page.data.characters;
-	// console.log(allCharacters);
 
 	const races = ['humans', 'orcs', 'dwarves', 'maiar', 'ents', 'elves', 'hobbits', 'uruk-hai'];
 	const alphabet = [
@@ -59,9 +57,6 @@
 			{#each alphabet as letter}
 				<button type="button" value={letter}>{letter}</button>
 			{/each}
-
-			<!-- Search bar -->
-			<input type="text" placeholder="Search..." bind:value={search} on:input={updateSearch} />
 		</div>
 
 		<form>
@@ -101,19 +96,18 @@
     main.all-characters {
         display: grid;
         grid-template-columns: 35% 65%;
-        grid-template-rows: 20% auto;
+        grid-template-rows: 10% auto;
     }
 
     section.character-card {
         overflow-y: scroll;
         grid-area: 2/2/3/3;
+        align-self: center;
     }
 
     article.character-links {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: auto;
-        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
         grid-area: 2/1/3/2;
         overflow-y: scroll;
     }

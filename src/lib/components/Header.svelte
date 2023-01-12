@@ -1,35 +1,37 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
+	import logo from '$lib/images/LOTR.svg';
 	import github from '$lib/images/github.svg';
+    import logoBottom from '$lib/images/characters.svg'
 </script>
 
 <header>
-	<div class="corner">
+	<section class="top">
 		<a href="/">
 			<img src={logo} alt="logo" />
+            <img id='bottom-logo' src={logoBottom} alt='logo bottom' />
 		</a>
-	</div>
+	</section>
 
 	<nav>
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+			<li aria-current={$page.url.pathname === '/fellowship' ? 'page' : undefined}>
 				<a href="/fellowship">The Fellowship</a>
 			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
+			<li aria-current={$page.url.pathname.startsWith('/characters') ? 'page' : undefined}>
 				<a href="/characters">All Characters</a>
 			</li>
 		</ul>
 	</nav>
 
-	<div class="corner">
+	<section class="bottom">
 		<a href="https://github.com/sveltejs/kit">
 			<img src={github} alt="GitHub" />
 		</a>
-	</div>
+	</section>
 </header>
 
 <style>
@@ -40,37 +42,41 @@
 		justify-content: space-between;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
+    .top a img{
+        height: 6rem;
+    }
 
-	.corner a {
+    .top a img#bottom-logo {
+        height: 3rem;
+    }
+    
+	.bottom a{
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 100%;
-		height: 100%;
 	}
 
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
+    .bottom a img {
+        height: 4rem;
+    }
+
+	.top a {
+        display: flex;
+        flex-direction: column;
 	}
 
 	nav {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background: #2A3527;
 	}
 
 	ul {
 		position: relative;
 		padding: 0;
 		margin: 0;
-		height: 3em;
+		height: 15em;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -83,26 +89,29 @@
 	li {
 		position: relative;
 		height: 100%;
+        width: 100%;
+        color: var(--color-text-2);
 	}
 
 	li[aria-current='page']::before {
-		--size: 6px;
+		--size: 10px;
 		content: '';
-		width: 0;
+		width: 100%;
 		height: 0;
 		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
+		left: 0;
+		top: calc(50% - var(--size));
 		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
+		border-left: var(--size) solid var(--color-theme-1);
 	}
 
 	nav a {
 		display: flex;
 		height: 100%;
 		align-items: center;
+        justify-content: flex-end;
 		padding: 0 0.5rem;
-		color: var(--color-text);
+		color: var(--color-text-3);
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
@@ -113,5 +122,7 @@
 
 	a:hover {
 		color: var(--color-theme-1);
+        text-decoration: underline;
+        opacity: 0.5;
 	}
 </style>

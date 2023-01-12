@@ -1,0 +1,1 @@
+<p>Click on a character to view more information</p>

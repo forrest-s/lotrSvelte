@@ -12,10 +12,8 @@ export async function load({ fetch, params }) {
     }
     // const getCharacter = 'test'
     const getCharacter = await fetchData(`character/${params.slug}`)
-    const getQuotes = await fetchData(`character/${params.slug}/quote`)
-    getCharacter.docs[0].quotes = getQuotes.docs    
-
+    console.log('character layout load', params.slug)
     return { 
-        character: getCharacter.docs[0],
+        character: getCharacter.docs[0]
     };
 }
