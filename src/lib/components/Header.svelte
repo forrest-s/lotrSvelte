@@ -1,16 +1,12 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/LOTR.svg';
+	import Logo from './Logo.svelte';
 	import github from '$lib/images/github.svg';
-    import logoBottom from '$lib/images/characters.svg'
 </script>
 
 <header>
 	<section class="top">
-		<a href="/">
-			<img src={logo} alt="logo" />
-            <img id='bottom-logo' src={logoBottom} alt='logo bottom' />
-		</a>
+		<Logo />
 	</section>
 
 	<nav>
@@ -18,7 +14,7 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/fellowship' ? 'page' : undefined}>
+			<li aria-current={$page.url.pathname.startsWith('/fellowship') ? 'page' : undefined}>
 				<a href="/fellowship">The Fellowship</a>
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/characters') ? 'page' : undefined}>
@@ -28,7 +24,7 @@
 	</nav>
 
 	<section class="bottom">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/forrest-s/lotrSvelte">
 			<img src={github} alt="GitHub" />
 		</a>
 	</section>
@@ -82,7 +78,7 @@
 		justify-content: center;
 		align-items: flex-end;
 		list-style: none;
-		background: var(--background);
+		background-color: var(--color-card-paragraph);
 		background-size: contain;
 	}
 
@@ -91,6 +87,11 @@
 		height: 100%;
         width: 100%;
         color: var(--color-text-2);
+	}
+
+	li[aria-current='page'] a {
+		color: var(--color-accent);
+		font-size: 1.1rem;
 	}
 
 	li[aria-current='page']::before {
@@ -102,7 +103,7 @@
 		left: 0;
 		top: calc(50% - var(--size));
 		border: var(--size) solid transparent;
-		border-left: var(--size) solid var(--color-theme-1);
+		border-left: var(--size) solid var(--color-accent);
 	}
 
 	nav a {
@@ -111,7 +112,7 @@
 		align-items: center;
         justify-content: flex-end;
 		padding: 0 0.5rem;
-		color: var(--color-text-3);
+		color: var(--color-light-shade);
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
@@ -121,7 +122,8 @@
 	}
 
 	a:hover {
-		color: var(--color-theme-1);
+		font-size: 1.1rem;
+		color: var(--color-accent);
         text-decoration: underline;
         opacity: 0.5;
 	}

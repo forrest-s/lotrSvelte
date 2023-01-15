@@ -13,7 +13,9 @@ export async function load({ fetch, params }) {
     // const getCharacter = 'test'
     const getCharacter = await fetchData(`character/${params.slug}`)
     const getQuotes = await fetchData(`character/${params.slug}/quote`)
-    getCharacter.docs[0].quotes = getQuotes.docs    
+    const getMovies = await fetchData(`movie`)
+    getCharacter.docs[0].quotes = getQuotes.docs
+    getCharacter.docs[0].movies = getMovies.docs
 
     return { 
         character: getCharacter.docs[0],

@@ -25,10 +25,8 @@
             />
         {/each}
     </article>
-    <section class='character-card'>
-        <slot>
-        </slot>
-    </section>
+    <slot>
+    </slot>
 </main>
 
 <style>
@@ -38,14 +36,10 @@
         grid-template-columns: 100%;	
     }
 
-    section.character-card {
-        overflow-y: scroll;
-    }
-
     article.fellowship-links {
         display: flex;
-		flex-wrap: wrap;
 		align-self: center;
+        overflow: scroll;
     }
 </style>
 

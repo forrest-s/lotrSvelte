@@ -23,7 +23,13 @@
 		align-items: center;
 		text-align: center;
 		justify-content: center;
-		background-color: #2A3527;
-		border-radius: 1rem;
-	}   
+		border-radius: 0.25rem;
+		border: 0.2rem solid var(--color-card-stroke);
+		color: var(--color-dark-shade);
+	}
+	
+	.character-link:hover {
+		background-color: var(--color-card-highlight);
+		color: var(--color-bg);
+	}
 </style>

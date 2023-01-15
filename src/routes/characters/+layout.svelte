@@ -1,11 +1,10 @@
 <script>
 	import CharacterLink from '$lib/components/CharacterLink.svelte';
-	import { writable } from 'svelte/store';
 	import { page } from '$app/stores';
     
 	let allCharacters = $page.data.characters;
 
-	const races = ['humans', 'orcs', 'dwarves', 'maiar', 'ents', 'elves', 'hobbits', 'uruk-hai'];
+	const races = ['Human', 'Orc', 'Dwarf', 'Maiar', 'Ent', 'Elf', 'Hobbit', 'Uruk-hai'];
 	const alphabet = [
 		'A',
 		'B',
@@ -35,39 +34,49 @@
 		'Z'
 	];
 
-	let search = writable('');
-	let selectedRaces = writable([]);
+	let selectedRaces = []
 
-	function updateSearch(event) {
-		search.set(event.target.value);
+	function filterRaces(races) {
+		const filtered = $page.data.characters.filter(character => races.includes(character.race))
+
+		return allCharacters = filtered
 	}
 
-	function updateSelectedRaces(event) {
-		if (event.target.checked) {
-			selectedRaces.update((races) => [...races, event.target.value]);
-		} else {
-			selectedRaces.update((races) => races.filter((race) => race !== event.target.value));
+	function filterLetter(event) {
+		if (selectedRaces.length) {
+			// reset selected races when filtering by letter.
+			selectedRaces = []
 		}
+
+		const filtered = $page.data.characters.filter(character => character.name.startsWith(event.target.value))
+
+		return allCharacters = filtered
+	}
+	function resetFilters() {
+		allCharacters = $page.data.characters
+		selectedRaces = []
 	}
 </script>
 
-<main class="all-characters">
+<main class="all-characters">	
 	<header>
 		<div>
 			{#each alphabet as letter}
-				<button type="button" value={letter}>{letter}</button>
+				<button on:click={filterLetter} type="button" value={letter}>{letter}</button>
 			{/each}
 		</div>
-
 		<form>
 			<!-- Checkboxes for each race -->
 			{#each races as race}
 				<label>
-					<input type="checkbox" value={race} on:change={updateSelectedRaces} />
+					<input bind:group={selectedRaces} type="checkbox" value={race}/>
 					{race}
 				</label>
 			{/each}
+			<button on:click={filterRaces(selectedRaces)}>Filter</button>
 		</form>
+		<p>Select a button to filter by the first names letter or select a few checkboxes and hit filter.</p>
+		<button on:click={resetFilters}>Reset Filters</button>
 	</header>
 
 	<article class="character-links">
@@ -87,22 +96,14 @@
 			/>
 		{/each}
 	</article>
-	<section class="character-card">
-		<slot />
-	</section>
+	<slot />
 </main>
 
 <style>
     main.all-characters {
         display: grid;
         grid-template-columns: 35% 65%;
-        grid-template-rows: 10% auto;
-    }
-
-    section.character-card {
-        overflow-y: scroll;
-        grid-area: 2/2/3/3;
-        align-self: center;
+        grid-template-rows: 15% auto;
     }
 
     article.character-links {
@@ -115,4 +116,8 @@
     header {
         grid-area: 1/1/2/3;
     }
+
+	header p {
+		margin: 0;
+	}
 </style>
