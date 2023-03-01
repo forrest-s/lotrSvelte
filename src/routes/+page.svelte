@@ -30,7 +30,7 @@
 <style>
 	main {
 		display: grid;
-		grid-template-columns: auto auto;
+		grid-template-columns: 32% auto;
 	}
 	
 	section {
@@ -39,6 +39,7 @@
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+		padding: 1rem;
 	}
 
 	img {
@@ -50,5 +51,9 @@
 		width: 100%;
 		color: var(--color-card-headline);
 		border-bottom: 0.25rem solid;
+	}
+
+	p {
+		text-align: center;
 	}
 </style>
