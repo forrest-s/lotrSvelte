@@ -43,6 +43,12 @@ body {
     background-color: var(--color-bg);
 }
 
+@media (max-width: 780px) {
+	body {
+		grid-template-columns: 35% auto;
+	}
+}
+
 main {
 	grid-area: 1/2/2/3;
 	height: 95%;

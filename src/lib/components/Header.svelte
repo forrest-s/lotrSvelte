@@ -37,14 +37,6 @@
 		flex-direction: column;
 		justify-content: space-between;
 	}
-
-    .top a img{
-        height: 6rem;
-    }
-
-    .top a img#bottom-logo {
-        height: 3rem;
-    }
     
 	.bottom a{
 		display: flex;
@@ -53,19 +45,20 @@
 	}
 
     .bottom a img {
-        height: 4rem;
+        height: 3rem;
     }
-
-	.top a {
-        display: flex;
-        flex-direction: column;
-	}
 
 	nav {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		--background: #2A3527;
+	}
+
+	@media (max-width: 780px) {
+		ul {
+			height: 10em;
+		}
 	}
 
 	ul {
